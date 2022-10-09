@@ -3,7 +3,5 @@
 </script>
 
 <template>
-  <main>
-    HomeView
-  </main>
+  <main>Main View</main>
 </template>

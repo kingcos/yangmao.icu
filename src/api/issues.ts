@@ -28,6 +28,7 @@ export const requestActivities = () => {
   return new Promise<Activity[]>((resolve, reject) => {
     requestIssues(userId, repo)
       .then((issues) => {
+        console.log(issues)
         resolve(
           issues
             .filter((issue) => issue.user.login === userId)
@@ -65,8 +66,12 @@ export function requestIssues(
         `https://api.github.com/repos/${repoOwner}/${repoName}/issues?page=${page}&per_page=${perPage}`
       )
       .then((response) => {
-        console.log(response.data);
-        resolve(response.data);
+        if (response.data instanceof Array) {
+            console.log(response.data);
+            resolve(response.data);
+        } else {
+            reject()
+        }
       })
       .catch((err) => {
         console.log(err);
